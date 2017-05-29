@@ -1,0 +1,182 @@
+@import "compass";
+
+// Corps de la page :
+html,body{
+	margin:0px;
+	padding:0px;
+	width:100%;
+	height:100%;
+}
+
+.panel-body{
+	overflow-y:auto;
+}
+
+// Bouton "fermer" sur les pages :
+.panel-heading span{
+    margin-top:-27px;
+    font-size:15px;
+    margin-right:-8px;
+}
+
+.clickable{
+    display:inline-block;
+    padding:8px;
+    cursor:pointer;
+}
+
+// Conteneur de l'ensemble de l'application :
+#app_container{
+	position:absolute;
+	z-index:1;
+	height:100%;width:100%;
+	overflow:hidden;
+	background-color:#f2ede7; //#AAC8C8
+	@include background-image(
+		radial-gradient(
+			rgba(250,250,250,0.05),
+			rgba(0,0,0,0.2)
+		)
+	);
+
+	#canvas{
+		display:block;
+		position:fixed;
+		top:0;left:0;bottom:0;right:0;
+	}
+
+	#page_container{
+		position:absolute;
+		top:50px;bottom:0px;
+		left:0px;right:0px;
+		padding-top:30px;
+		background-color:rgba(0,0,0,0.5);
+		@include background-image(
+			linear-gradient(
+				rgba(255,255,255,0.1),
+				rgba(0,0,0,0.2)
+			)
+		);
+	}
+}
+
+#bubbles_wrap{
+	left:0px;top:0px;
+	@include transition(transform 2s ease-in-out);
+}
+
+// Conteneur des informations sur les bulles :
+#bubbles_physics{
+	position:fixed;
+	bottom:8px;
+	left:12px;
+	@include opacity(0.75);
+
+	.bubble_physics{
+		display:none;
+		position:absolute;
+		bottom:0px;
+		left:0px;
+		white-space:nowrap;
+		font-size:10px;
+	}
+}
+
+// Conteneur des bulles :
+#bubbles_container{
+	position: absolute;
+
+	// Div très large pour permettre de déplacer la carte :
+	#dragger{
+		background-image:url("./images/background.png");
+		position:absolute;
+		@include translate(-50%,-50%);
+		height:1000000px;width:1000000px;
+	}
+
+	// Lien entre les bulles :
+	.link{
+		display:none;
+		position:absolute;
+		height:2px;
+		text-align:center;
+		background-color:rgba(0,0,0,0.25);
+		@include transform-origin(0%,50%);
+		@include box-shadow(0px 0px 4px rgba(0,0,0,0.25));
+
+		.link_intensite{
+			cursor:pointer;
+			margin:auto;
+			display:inline-block;
+			position:absolute;
+			bottom:-6px;
+			@include transform-origin(50%,50%);
+			height:14px;width:14px;
+			border: 1px solid;
+			border-radius: 100%;
+			font-weight:bold;
+			font-size:12px;
+			line-height:12px;
+			font-family:Arial, sans-serif;
+			color:#eeeeee;
+			@include box-shadow(inset 0 1px rgba(255, 255, 255, 0.3));
+		}
+	}
+
+	// Conteneur d'une seule bulle :
+	.bubble_container{
+		position:absolute;
+		z-index:0;
+
+		.bubble_mass{
+			display:none;
+			top:-12px;
+			cursor:pointer;
+			@include translate(-50%,-50%);
+			font-size: 9px;
+			position: absolute;
+			line-height: 14px;
+			padding: 0 4px;
+			font-family: Arial, sans-serif;
+			color:#eeeeee;
+			border: 1px solid black;
+			border-radius: 8px;
+			@include background(linear-gradient(to bottom, rgb(100,100,100), rgb(50,50,50)));
+			@include box-shadow(inset 0 1px rgba(255, 255, 255, 0.3),0px 0px 8px rgba(250,250,250,0.75),0px 0px 3px rgba(0,0,0,1));
+		}
+
+		.bubble{
+			cursor:pointer;
+			position:absolute;
+			top:0px;left:0px;
+			@include translate(-50%,-50%);
+			overflow:hidden;
+			border-radius:100%;
+			background-color:rgba(170,200,200,1);
+			@include box-shadow(0px 0px 8px rgba(250,250,250,0.75),0px 0px 3px rgba(0,0,0,1),inset 0px 5px 15px 2px rgba(255,255,255,0.75));
+		}
+
+		.bubble_titre{
+			display:none;
+			position:absolute;
+
+			span{
+				cursor:pointer;
+				padding:4px;
+				padding-right:6px;
+				white-space:nowrap;
+				color:rgba(0,0,0,0.75);
+				font-size:10px;
+				background-color:#eeeeee;
+				@include border-radius(0px 4px 4px 0px);
+				@include box-shadow(0px 0px 8px rgba(250,250,250,0.75),0px 0px 3px rgba(0,0,0,1),inset 0px 5px 15px 2px rgba(255,255,255,0.75));
+			}
+		}
+
+		.icon{
+			width:100%;
+			height:100%;
+			background-size:100% 100%;
+		}
+	}
+}
